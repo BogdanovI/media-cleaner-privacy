@@ -1,6 +1,6 @@
 # Privacy Policy for On-Device Media Cleaner
 
-**Last updated:** 5 August 2026
+**Last updated:** 9 August 2026
 
 This policy explains what On-Device Media Cleaner ("the app", "we") does with
 your information. It applies to the Android app published under the package name
@@ -45,9 +45,10 @@ This never leaves the device and is removed when you uninstall the app:
 - your chosen language and light/dark theme
 - duplicate matching strictness, blur sensitivity thresholds, and the "large
   file" size threshold
-- your premium status flag and your daily free-deletion counters
+- your daily free-deletion counters
 
-We have no access to any of it.
+We have no access to any of it. Your Premium status is not decided by this local
+data — it comes from your Google Play purchase, as described in section 4.
 
 ## 4. Advertising (Google AdMob)
 
@@ -60,6 +61,8 @@ us, including:
   version, coarse language/region settings)
 - your **IP address**, from which approximate location may be derived
 - ad interaction data (impressions, clicks, rewarded-ad completions)
+- ad attribution and interest signals via the Android Privacy Sandbox
+  (Topics and Attribution APIs)
 
 This processing is carried out by Google as an independent controller/processor
 under its own terms. See:
@@ -76,27 +79,33 @@ see aggregate, non-identifying earnings and performance reports.
 If you are in the European Economic Area, the United Kingdom or Switzerland, the
 app asks for your consent before serving personalised ads, using Google's
 User Messaging Platform (UMP). You may withdraw or change your consent at any
-time from the app's settings. If you decline personalised ads, you will still see
-ads, but non-personalised ones.
+time from the app's settings, under "Ad privacy options". If you decline
+personalised ads, you will still see ads, but non-personalised ones.
 
-<!-- ACCURACY WARNING: this section describes intended behaviour. It is NOT true
-     until the UMP/ConsentInformation flow is actually implemented in
-     lib/services/ad_service.dart. Either ship UMP before publishing, or delete
-     this subsection — do not publish a claim the app does not honour. -->
+No ads are requested at all until this consent step has completed.
 
 ### Premium
 
-Purchasing premium removes ads. Premium status is currently stored locally on
-your device only.
+Premium is a one-time purchase that removes ads, lifts the daily delete limit and
+unlocks advanced scan settings. Purchases are processed by **Google Play**, and
+your entitlement is managed on our behalf by **RevenueCat**, which receives a
+pseudonymous app user identifier and your purchase receipt in order to confirm
+it. RevenueCat does not receive your name, email address or any of your photos.
+See https://www.revenuecat.com/privacy/ for their policy.
+
+We never see or handle your payment details; those stay with Google Play.
 
 ## 5. Permissions and why they are needed
 
 | Permission | Why |
 | --- | --- |
 | `READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`, `READ_MEDIA_VISUAL_USER_SELECTED` (and `READ_EXTERNAL_STORAGE` on Android 12 and below) | To read your photos and videos so they can be analysed on-device. This is the app's core function. |
-| `POST_NOTIFICATIONS` | To show scan progress and a "scan complete" notification. |
+| `POST_NOTIFICATIONS`, `VIBRATE` | To show scan progress and a "scan complete" notification. |
 | `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, `WAKE_LOCK` | To keep a long scan running when the app is in the background, so it is not killed mid-scan. |
-| `INTERNET`, `ACCESS_NETWORK_STATE`, `com.google.android.gms.permission.AD_ID` | Added by the Google Mobile Ads SDK to load ads. The app itself makes no network requests. |
+| `RECEIVE_BOOT_COMPLETED` | Declared by the notification and background-task libraries the app uses. The app does not start itself on boot. |
+| `INTERNET`, `ACCESS_NETWORK_STATE` | Added by the Google Mobile Ads SDK to load ads. The app itself makes no network requests of any kind. |
+| `com.google.android.gms.permission.AD_ID`, `ACCESS_ADSERVICES_AD_ID`, `ACCESS_ADSERVICES_ATTRIBUTION`, `ACCESS_ADSERVICES_TOPICS` | Added by the Google Mobile Ads SDK for advertising identification, ad attribution and Android Privacy Sandbox topics. Used by Google for advertising as described in section 4. |
+| `com.android.vending.BILLING` | Added by Google Play Billing so the one-time Premium purchase can be made. |
 
 ## 6. Analytics and crash reporting
 
