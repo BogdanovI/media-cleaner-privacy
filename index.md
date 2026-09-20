@@ -103,7 +103,7 @@ We never see or handle your payment details; those stay with Google Play.
 | `POST_NOTIFICATIONS`, `VIBRATE` | To show scan progress and a "scan complete" notification. |
 | `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC`, `WAKE_LOCK` | To keep a long scan running when the app is in the background, so it is not killed mid-scan. |
 | `RECEIVE_BOOT_COMPLETED` | Declared by the notification and background-task libraries the app uses. The app does not start itself on boot. |
-| `INTERNET`, `ACCESS_NETWORK_STATE` | Added by the Google Mobile Ads SDK to load ads. The app itself makes no network requests of any kind. |
+| `INTERNET`, `ACCESS_NETWORK_STATE` | Added by the Google Mobile Ads SDK to load ads and by RevenueCat to confirm your purchase. Outside those two, the app makes no network requests of any kind — all scanning happens offline. |
 | `com.google.android.gms.permission.AD_ID`, `ACCESS_ADSERVICES_AD_ID`, `ACCESS_ADSERVICES_ATTRIBUTION`, `ACCESS_ADSERVICES_TOPICS` | Added by the Google Mobile Ads SDK for advertising identification, ad attribution and Android Privacy Sandbox topics. Used by Google for advertising as described in section 4. |
 | `com.android.vending.BILLING` | Added by Google Play Billing so the one-time Premium purchase can be made. |
 
